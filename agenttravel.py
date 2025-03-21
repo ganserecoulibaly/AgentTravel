@@ -42,16 +42,28 @@ def obtenir_restaurants(budget):
     }
     return restaurants[budget]
 
+# Simulation d'activités nocturnes
+def obtenir_activites_nocturnes(budget):
+    activites_nocturnes = {
+        "faible": ["Promenade nocturne sur les Champs-Élysées", "Concert dans un bar de jazz", "Cinéma en plein air"],
+        "moyen": ["Spectacle de cabaret", "Dégustation de vins", "Visite nocturne d'un musée"],
+        "élevé": ["Opéra à l'Opéra Garnier", "Dîner gastronomique avec vue", "Soirée privée dans un club exclusif"],
+    }
+    return activites_nocturnes[budget]
+
 def creer_itineraire_paris(budget, duree):
     activites = obtenir_activites_getyourguide(budget)
     restaurants = obtenir_restaurants(budget)
+    activites_nocturnes = obtenir_activites_nocturnes(budget)
 
     itineraires = []
     for jour in range(duree):
         jour_itineraire = {
             "jour": jour + 1,
-            "activites": random.sample(activites, min(3, len(activites))),
-            "restaurants": random.sample(restaurants, 2),
+            "matin": random.sample(activites, 1)[0],
+            "midi": random.sample(restaurants, 1)[0],
+            "apres_midi": random.sample(activites, 1)[0],
+            "soir": random.sample(activites_nocturnes, 1)[0],
         }
         itineraires.append(jour_itineraire)
 
@@ -60,12 +72,10 @@ def creer_itineraire_paris(budget, duree):
 def afficher_itineraire(itineraires):
     for jour in itineraires:
         print(f"Jour {jour['jour']}:")
-        print("  Activités :")
-        for activite in jour["activites"]:
-            print(f"    - {activite['nom']} (Prix : {activite['prix']}€)")
-        print("  Restaurants :")
-        for restaurant in jour["restaurants"]:
-            print(f"    - {restaurant['nom']} ({restaurant['type']})")
+        print(f"  9h00-12h00 : {jour['matin']['nom']} (Prix : {jour['matin']['prix']}€)")
+        print(f"  12h00-13h30 : {jour['midi']['nom']} ({jour['midi']['type']})")
+        print(f"  13h30-19h00 : {jour['apres_midi']['nom']} (Prix : {jour['apres_midi']['prix']}€)")
+        print(f"  19h30-23h00 : {jour['soir']}")
         print("-" * 20)
 
 # Exemple d'utilisation
