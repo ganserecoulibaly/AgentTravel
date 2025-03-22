@@ -1,12 +1,28 @@
-Ajout de la durée aux activités
-Ajout d'une durée fixe au restaurant en fonction de la qualité du restaurant    
+- Ajout d'une durée fixe au restaurant en fonction de la qualité du restaurant    
     exemple : fast food 25min
               brasserie : 45min
               etc
-si une activité a été choisie une fois, ne plus la reproposer dans la liste (la retirer de la liste)
-ajout un prix aux activités si pas déjà fait
-le repas doit etre compris entre 12h et 13h30
-début de la journée entre 9h30 et 10h 
-fin de la journée 19 / 19h30 
-prévoir un repas pour le soir vers 20h 
-prévoir des activités nocturnes sympa (hors restaurant)              
+
+- le repas doit etre compris entre 12h et 13h30
+- début de la journée entre 9h30 et 10h 
+- fin de la journée 19h / 19h30 
+- prévoir un repas pour le soir vers 20h 
+              
+- ajout des itinéraire entre les lieux
+- pouvoir se rendre sur la reservation d'une activité
+- possibilité de reserver un restaurant
+- connexion API activités (trip advisor, get your guide, etc)
+- connexion API restaurant (the fork,)
+- connexion maps / ratp / IDF mobilité pour itinéraire
+- la variable "budget" demandé en entrée doit etre dans une liste prédéfini (que le visiteur ne se trompe pas)
+
+
+
+FAIT : 
+- ajout de la durée aux activités
+- ajouter le prix total de la journée
+- prévoir des activités nocturnes sympa (hors restaurant)
+- si une activité a été choisie une fois, ne plus la reproposer dans la liste (la retirer de la liste)
+- ajout un prix aux activités si pas déjà fait
+- possibilité d'indiquer un lieu de départ le matin (facultatif)
+- ajouter une ville (la liste des activités en dépendra)
