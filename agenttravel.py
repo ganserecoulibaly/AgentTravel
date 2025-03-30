@@ -1,7 +1,7 @@
 import random
 
 # Simulation de données GetYourGuide (à remplacer par une API réelle)
-def obtenir_activites_getyourguide(budget):
+def obtenir_activites_getyourguide(budget, activites_supplementaires=None):
     activites = {
         "faible": [
             {"nom": "Promenade sur les quais de Seine", "prix": 0, "duree": 120},
@@ -40,6 +40,11 @@ def obtenir_activites_getyourguide(budget):
             {"nom": "Visite du Château de Versailles avec guide privé", "prix": 280, "duree": 240},
         ],
     }
+ 
+    # Ajout des activités supplémentaires
+    if activites_supplementaires:
+        activites[budget].extend(activites_supplementaires)  
+
     return activites[budget]
 
 def obtenir_restaurants(budget):
@@ -124,17 +129,29 @@ def obtenir_activites_nocturnes(budget):
     }
     return activites_nocturnes[budget]
 
-def creer_itineraire(budget, duree, lieu_depart=None):
-    activites = obtenir_activites_getyourguide(budget)
+def creer_itineraire(budget, duree, lieu_depart=None, activites_supplementaires=None, jours_visites=None):
+    activites = obtenir_activites_getyourguide(budget, activites_supplementaires)
     restaurants = obtenir_restaurants(budget)
     activites_nocturnes = obtenir_activites_nocturnes(budget)
+
+    # Ajout des lieux spécifiés par l'utilisateur à la liste des activités
+    if activites_supplementaires:
+        for lieu in activites_supplementaires:
+            
+            activites.append({"nom": f"Visite de {lieu}", "prix": 0, "duree": 0})
 
     itineraires = []
     activites_utilisees = []
     activites_nocturnes_utilisees = []
 
     for jour in range(duree):
-        # Vérification pour les activités de jour
+        #activite_supplementaire = {"nom": f"Visite de {lieu}", "prix": 0, "duree": 0} Ajout des lieux spécifiés par l'utilisateur à la liste des activités du jour
+        if activites_supplementaires and jours_visites and (jour + 1) in jours_visites:
+            for lieu in activites_supplementaires:
+                act = {"nom": f"Visite de {lieu}", "prix": 0, "duree": 0} 
+                #activite_supplementaire = act
+                activites.append(act)
+
         activites_disponibles = [a for a in activites if a not in activites_utilisees]
         if not activites_disponibles:
             activites_utilisees = []
@@ -153,7 +170,7 @@ def creer_itineraire(budget, duree, lieu_depart=None):
             else:
                 break
         if not matin:
-            matin.append(random.choice(activites_disponibles)) # si aucune activité ne dure moins de 3h, on prend une activité au hasard.
+            matin.append(random.choice(activites_disponibles))
             activites_utilisees.append(matin[0])
 
         midi = random.choice(restaurants)
@@ -176,10 +193,9 @@ def creer_itineraire(budget, duree, lieu_depart=None):
             else:
                 break
         if not apres_midi:
-            apres_midi.append(random.choice(activites_disponibles)) # si aucune activité ne dure moins de 5h30, on prend une activité au hasard.
+            apres_midi.append(random.choice(activites_disponibles))
             activites_utilisees.append(apres_midi[0])
 
-        # Vérification pour les activités nocturnes
         activites_nocturnes_disponibles = [a for a in activites_nocturnes if a not in activites_nocturnes_utilisees]
         if not activites_nocturnes_disponibles:
             activites_nocturnes_utilisees = []
@@ -189,14 +205,13 @@ def creer_itineraire(budget, duree, lieu_depart=None):
         activites_nocturnes_utilisees.append(soir)
 
         jour_itineraire = {
-            "jour": jour + 1,            
+            "jour": jour + 1,
             "matin": matin,
             "midi": midi,
             "apres_midi": apres_midi,
             "soir": soir,
         }
         itineraires.append(jour_itineraire)
-
     return itineraires
 
         
@@ -234,5 +249,14 @@ lieu_depart = input("Quel est votre lieu de départ ? (laisser vide si inconnu) 
 budget = input("Quel est votre budget (faible, moyen, élevé) ? ")
 duree = int(input("Combien de jours dure votre séjour ? "))
 
-itineraires = creer_itineraire(budget, duree,lieu_depart)
+# Demande des activités supplémentaires
+activites_supplementaires_input = input("Quelles activités supplémentaires souhaitez-vous ajouter ? (séparées par une virgule, laisser vide si aucune) ")
+activites_supplementaires = [{"nom": activite.strip(), "prix": 0, "duree": 0} for activite in activites_supplementaires_input.split(',')] if activites_supplementaires_input else None
+
+
+jours_visites = input("Quels jours souhaitez-vous visiter ces lieux ? (séparés par une virgule, laisser vide si aucun) ")
+jours_visites = [int(jour.strip()) for jour in jours_visites.split(',')] if jours_visites else None
+
+
+itineraires = creer_itineraire(budget, duree, lieu_depart, activites_supplementaires, jours_visites)
 afficher_itineraire(itineraires,lieu_depart)

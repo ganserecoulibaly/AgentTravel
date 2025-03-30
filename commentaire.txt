@@ -1,3 +1,34 @@
+
+
+Exécuter le code : python3 agenttraval.py
+
+API ROUTE
+https://developers.google.com/maps/documentation/routes/overview?hl=fr
+2 méthodes: ComputeRoutes et ComputeRouteMatrix
+    ComputeRoute : https://developers.google.com/maps/documentation/routes/compute_route_directions?hl=fr 
+           https://routes.googleapis.com/directions/v2:computeRoutes
+
+Exemple d'appel : 
+https://routes.googleapis.com/directions/v2:computeRoutes?
+origin.location.lat=48.8566&origin.location.lng=2.3522&
+destination.location.lat=45.7640&destination.location.lng=4.8357&
+travelMode=TRANSIT&
+routingPreference=TRAFFIC_AWARE&
+key=
+
+
+GetLoc - get lat long
+https://maps.googleapis.com/maps/api/geocode/json?address=champigny&key=
+
+
+https://developers.google.com/maps/documentation/places/web-service/overview?hl=fr
+
+
+
+TO FIX:
+- corriger l'ajout de lieu dans la réponse finale
+- quand je donne une liste de jour, les activités se mettent pas dans les bons jours
+
 - Ajout d'une durée fixe au restaurant en fonction de la qualité du restaurant    
     exemple : fast food 25min
               brasserie : 45min
@@ -7,16 +38,19 @@
 - début de la journée entre 9h30 et 10h 
 - fin de la journée 19h / 19h30 
 - prévoir un repas pour le soir vers 20h 
-              
+
 - ajout des itinéraire entre les lieux
 - pouvoir se rendre sur la reservation d'une activité
 - possibilité de reserver un restaurant
-- connexion API activités (trip advisor, get your guide, etc)
-- connexion API restaurant (the fork,)
+- connexion API activités (trip advisor, get your guide, api google place, etc)
+- connexion API restaurant (the fork,etc)
 - connexion maps / ratp / IDF mobilité pour itinéraire
 - la variable "budget" demandé en entrée doit etre dans une liste prédéfini (que le visiteur ne se trompe pas)
-
-
+- API Places / Google maps platform : Vous pouvez rechercher des lieux par nom, par type (par exemple, "musée", "parc", "restaurant") ou par proximité géographique.
+- trouver les coordonnés long/lat à partir d'un lieu/ adresse 
+- Trier les lieux d'activité par groupe (pour éviter les trop longs trajets en une seule journée)
+   placer ses lieux dans des groupes (par groupe d'arrondissement)
+   appliquer au code python
 
 FAIT : 
 - ajout de la durée aux activités
@@ -26,3 +60,6 @@ FAIT :
 - ajout un prix aux activités si pas déjà fait
 - possibilité d'indiquer un lieu de départ le matin (facultatif)
 - ajouter une ville (la liste des activités en dépendra)
+- donnez la possiblité d'inclure des lieux prédéfinis par les voyageurs à intégrer dans un trajet (+ numéro du jour en option facultatives)              
+
+
