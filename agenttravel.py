@@ -50,40 +50,40 @@ def obtenir_activites_getyourguide(budget, activites_supplementaires=None):
 def obtenir_restaurants(budget):
     restaurants = {
         "faible": [
-            {"nom": "Crêperie Genia", "type": "Crêperie"},
-            {"nom": "Le Bouillon Chartier", "type": "Bistrot"},
-            {"nom": "Five Guys", "type": "Burger"},
-            {"nom": "L'As du Fallafel", "type": "Cuisine du Moyen-Orient"},
-            {"nom": "La Droguerie", "type": "Sandwicherie"},
-            {"nom": "Le Petit Marcel", "type": "Bistrot"},
-            {"nom": "Breizh Café", "type": "Crêperie"},
-            {"nom": "Le Relais de l'Entrecôte", "type": "Steakhouse"},
-            {"nom": "Pizzeria Popolare", "type": "Pizzeria"},
-            {"nom": "La Crémaillère 1900", "type": "Bistrot"},
+            {"nom": "Crêperie Genia", "type": "Crêperie", "duree": 25},
+            {"nom": "Le Bouillon Chartier", "type": "Bistrot", "duree": 45},
+            {"nom": "Five Guys", "type": "Burger", "duree": 25},
+            {"nom": "L'As du Fallafel", "type": "Cuisine du Moyen-Orient", "duree": 25},
+            {"nom": "La Droguerie", "type": "Sandwicherie", "duree": 25},
+            {"nom": "Le Petit Marcel", "type": "Bistrot", "duree": 45},
+            {"nom": "Breizh Café", "type": "Crêperie", "duree": 25},
+            {"nom": "Le Relais de l'Entrecôte", "type": "Steakhouse", "duree": 45},
+            {"nom": "Pizzeria Popolare", "type": "Pizzeria", "duree": 35},
+            {"nom": "La Crémaillère 1900", "type": "Bistrot", "duree": 45},
         ],
         "moyen": [
-            {"nom": "Le Petit Marché", "type": "Brasserie"},
-            {"nom": "L'Arpège", "type": "Gastronomique"},
-            {"nom": "La Coupole", "type": "Brasserie"},
-            {"nom": "Le Comptoir du Relais", "type": "Bistrot"},
-            {"nom": "Les Cocottes de Christian Constant", "type": "Bistrot"},
-            {"nom": "Le Chateaubriand", "type": "Gastronomique"},
-            {"nom": "Septime", "type": "Gastronomique"},
-            {"nom": "Frenchie", "type": "Gastronomique"},
-            {"nom": "Le Jules Verne", "type": "Gastronomique"},
-            {"nom": "Guy Savoy", "type": "Gastronomique"},
+            {"nom": "Le Petit Marché", "type": "Brasserie", "duree": 45},
+            {"nom": "L'Arpège", "type": "Gastronomique", "duree": "90"},
+            {"nom": "La Coupole", "type": "Brasserie", "duree": 45},
+            {"nom": "Le Comptoir du Relais", "type": "Bistrot", "duree": 45},
+            {"nom": "Les Cocottes de Christian Constant", "type": "Bistrot", "duree": 45},
+            {"nom": "Le Chateaubriand", "type": "Gastronomique", "duree": 90},
+            {"nom": "Septime", "type": "Gastronomique", "duree": 90},
+            {"nom": "Frenchie", "type": "Gastronomique", "duree": 90},
+            {"nom": "Le Jules Verne", "type": "Gastronomique", "duree": 90},
+            {"nom": "Guy Savoy", "type": "Gastronomique", "duree": 90},
         ],
         "élevé": [
-            {"nom": "L'Ambroisie", "type": "Gastronomique"},
-            {"nom": "Le Jules Verne", "type": "Gastronomique"},
-            {"nom": "Guy Savoy", "type": "Gastronomique"},
-            {"nom": "Pierre Gagnaire", "type": "Gastronomique"},
-            {"nom": "Alain Ducasse au Plaza Athénée", "type": "Gastronomique"},
-            {"nom": "Epicure", "type": "Gastronomique"},
-            {"nom": "Le Cinq", "type": "Gastronomique"},
-            {"nom": "L'Astrance", "type": "Gastronomique"},
-            {"nom": "Yam'Tcha", "type": "Gastronomique"},
-            {"nom": "Kei", "type": "Gastronomique"},
+            {"nom": "L'Ambroisie", "type": "Gastronomique", "duree": 90},
+            {"nom": "Le Jules Verne", "type": "Gastronomique", "duree": 90},
+            {"nom": "Guy Savoy", "type": "Gastronomique", "duree": 90},
+            {"nom": "Pierre Gagnaire", "type": "Gastronomique", "duree": 90},
+            {"nom": "Alain Ducasse au Plaza Athénée", "type": "Gastronomique", "duree": 90},
+            {"nom": "Epicure", "type": "Gastronomique", "duree": 90},
+            {"nom": "Le Cinq", "type": "Gastronomique", "duree": 90},
+            {"nom": "L'Astrance", "type": "Gastronomique", "duree": 90},
+            {"nom": "Yam'Tcha", "type": "Gastronomique", "duree": 90},
+            {"nom": "Kei", "type": "Gastronomique", "duree": 90},
         ],
     }
     return restaurants[budget]
@@ -226,7 +226,7 @@ def afficher_itineraire(itineraires, lieu_depart=None):
         duree_totale_jour = sum(a['duree'] for a in jour['matin']) + sum(a['duree'] for a in jour['apres_midi']) + jour['soir']['duree']
 
         heures = duree_totale_jour // 60
-        minutes = duree_totale_jour % 60
+        minutes = (duree_totale_jour - heures * 60) % 60
 
         print(f"Jour {jour['jour']}:")
         if lieu_depart != "": 

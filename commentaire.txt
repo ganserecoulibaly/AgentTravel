@@ -29,10 +29,8 @@ TO FIX:
 - corriger l'ajout de lieu dans la réponse finale
 - quand je donne une liste de jour, les activités se mettent pas dans les bons jours
 
-- Ajout d'une durée fixe au restaurant en fonction de la qualité du restaurant    
-    exemple : fast food 25min
-              brasserie : 45min
-              etc
+    
+
 
 - le repas doit etre compris entre 12h et 13h30
 - début de la journée entre 9h30 et 10h 
@@ -61,5 +59,6 @@ FAIT :
 - possibilité d'indiquer un lieu de départ le matin (facultatif)
 - ajouter une ville (la liste des activités en dépendra)
 - donnez la possiblité d'inclure des lieux prédéfinis par les voyageurs à intégrer dans un trajet (+ numéro du jour en option facultatives)              
+- Ajout d'une durée fixe au restaurant en fonction de la qualité du restaurant : pour l'instant, je n'en fais rien
 
 
